@@ -1,0 +1,1 @@
+Generation: 1\nConcept: Genetic Code - DNA bases (A, T, G, C) encoding information with mutations and replication\n
