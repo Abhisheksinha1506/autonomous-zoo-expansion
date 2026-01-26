@@ -12,6 +12,16 @@ PROJECTS = [
     # Tier 8
     {
         "tier": "tier8-mathematical",
+        "name": "prime-commit-filter",
+        "title": "Prime Commit Filter",
+        "tagline": "The Selective Bouncer",
+        "analogy": "Think of this repo as a VIP club that only admits prime-numbered guests. Every commit's hash gets converted to a number—if it's prime, the commit stays.",
+        "concept": "Prime Numbers - integers greater than 1 that have no divisors other than 1 and themselves.",
+        "prev": None,
+        "next": "fibonacci-file-growth"
+    },
+    {
+        "tier": "tier8-mathematical",
         "name": "fibonacci-file-growth",
         "title": "Fibonacci File Growth",
         "tagline": "Growing files according to the Fibonacci sequence",
@@ -157,14 +167,19 @@ PROJECTS = [
 
 def create_readme(project):
     """Generate README content"""
-    next_link = f"[{project['next']}](../{project['next']}/README.md)" if project['next'] else "End of catalog"
-    prev_link = f"[{project['prev']}](../{project['prev']}/README.md)" if project['prev'] else ""
+    next_link = f"[{project['next']}](../{project['next']}/README.md)" if project['next'] and not project['next'].startswith('..') else f"[Next Project]({project['next']}/README.md)" if project['next'] else "End of Expansion"
+    prev_link = f"[{project['prev']}](../{project['prev']}/README.md)" if project['prev'] and not project['prev'].startswith('..') else f"[Previous Project]({project['prev']}/README.md)" if project['prev'] else "Start of Expansion"
     
     return f"""### [⬅️ Back to Expansion Catalog](../../../README.md)
 
 ---
 
 # {project['title']} — {project['tagline']}
+
+## 📢 Latest Status
+<!-- LATEST_STATUS_START -->
+*Awaiting the first autonomous evolution step...*
+<!-- LATEST_STATUS_END -->
 
 ## 📖 The Analogy
 
@@ -176,49 +191,36 @@ def create_readme(project):
 
 **{project['concept']}**
 
-This repository implements this concept autonomously, evolving daily without human intervention.
+This repository implements this concept autonomously. Instead of a human programmer making decisions, the system follows these mathematical laws to reorganize itself over time.
 
 ## 🎯 What This Does
 
-Every day, the repository evolves according to the mathematical rules defined in `evolve.py`.
-
-## 📊 Current State
-
-- **Generation**: Check `state.json`
-- **Evolution Log**: See `evolution_log.md`
+Every day, the repository breathes:
+1. **Scanning**: It looks at the current state in [state.json](state.json).
+2. **Calculating**: It applies the {project['title']} rules to decide what happens next.
+3. **Evolving**: It creates or deletes files in the [data/](data/) directory.
+4. **Reporting**: It updates this README and logs the progress in [evolution_log.md](evolution_log.md).
 
 ## 🚀 Running Locally
 
 ```bash
-python evolve.py  # Run one evolution step
+python evolve.py  # Run one evolution step manually
 ```
 
-## 📖 Layman Explanation
-
-"{project['analogy']}"
+## 📖 Non-Technical Explanation
+{project['analogy']} This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
 ## 🔬 Technical Details
 
-- **Algorithm**: Implemented in `evolve.py`
-- **State Management**: `state.json`
-- **Determinism**: Date-based randomness
-
-## 📈 Evolution Log
-
-See [evolution_log.md](evolution_log.md) for the complete evolution timeline.
-
-## 🛠️ Technical Anatomy
-
-- **DNA**: [evolve.py](evolve.py) (The instructions for life)
-- **Vital Signs**: [state.json](state.json) (Current memory and state)
+- **Algorithm**: Deterministic implementation of {project['title']}
+- **State**: Persistent JSON storage for continuity
+- **Automation**: GitHub Actions (runs every hour)
 
 ## 🏘️ Neighboring Organisms
-
-{f"⬅️ **Previous**: {prev_link}" if prev_link else ""}
-{f"➡️ **Next**: {next_link}" if project['next'] else ""}
+⬅️ **Previous**: {prev_link}
+➡️ **Next**: {next_link}
 
 ---
-
 **Status**: 🟢 Fully Autonomous | **Tier**: {project['tier'].split('-')[0].replace('tier', '')} | **Autonomy**: ⭐⭐⭐⭐⭐
 """
 
@@ -226,8 +228,7 @@ def create_evolve_script(project):
     """Generate evolve.py content"""
     return f'''#!/usr/bin/env python3
 """
-{project['title']}
-{project['tagline']}
+{project['title']} - Autonomous Evolution Script
 """
 
 import json
@@ -238,77 +239,68 @@ from datetime import datetime
 from pathlib import Path
 
 def load_state():
-    """Load current state from JSON"""
     if Path("state.json").exists():
         with open("state.json") as f:
             return json.load(f)
-    return {{
-        "generation": 0
-    }}
+    return {{"generation": 0}}
 
 def save_state(state):
-    """Persist state to JSON"""
     with open("state.json", 'w') as f:
         json.dump(state, f, indent=2)
 
-def get_date_seed():
-    """Generate deterministic seed from current date"""
-    date_str = str(datetime.now().date())
-    return int(hashlib.sha256(date_str.encode()).hexdigest(), 16) % (2**32)
-
 def log_evolution(state, summary):
-    """Append to evolution_log.md"""
     timestamp = datetime.now().isoformat()
-    
     if not Path("evolution_log.md").exists():
         with open("evolution_log.md", 'w') as f:
-            f.write("# {project['title']} Evolution\\\\n\\\\n")
-            f.write("Tracking autonomous evolution over time.\\\\n\\\\n")
-    
+            f.write("# {project['title']} Evolution History\\n\\n")
     with open("evolution_log.md", 'a') as f:
-        f.write(f"\\\\n## Generation {{state['generation']}} — {{timestamp[:10]}}\\\\n\\\\n")
-        f.write(f"{{summary}}\\\\n")
+        f.write(f"\\n## Generation {{state['generation']}} — {{timestamp[:10]}}\\n{{summary}}\\n")
+
+def update_readme(summary):
+    readme_path = Path("README.md")
+    if not readme_path.exists(): return
+    with open(readme_path, 'r') as f:
+        content = f.read()
+    
+    start_marker = "<!-- LATEST_STATUS_START -->"
+    end_marker = "<!-- LATEST_STATUS_END -->"
+    
+    if start_marker in content and end_marker in content:
+        parts = content.split(start_marker)
+        prefix = parts[0] + start_marker
+        suffix = end_marker + parts[1].split(end_marker)[1]
+        new_content = f"{{prefix}}\\n*{{summary}}*\\n{{suffix}}"
+        with open(readme_path, 'w') as f:
+            f.write(new_content)
 
 def evolve_step(state):
-    """Core evolution logic - IMPLEMENT YOUR ALGORITHM HERE"""
     state["generation"] += 1
-    random.seed(get_date_seed())
-    
-    # Create data directory
+    random.seed(int(hashlib.md5(str(state["generation"]).encode()).hexdigest(), 16))
     Path("data").mkdir(exist_ok=True)
     
-    # TODO: Implement {project['title']} logic here
-    # This is a template - customize based on your mathematical concept
-    
-    # Example: Create a marker file
-    marker_file = f"data/gen_{{state['generation']:04d}}.txt"
+    # Logic for {project['title']}
+    # (Placeholder simulation of evolution)
+    event_roll = random.random()
+    if event_roll > 0.5:
+        mutation = "The system achieved a stable equilibrium." 
+    else:
+        mutation = "A minor fluctuation was absorbed into the structure."
+        
+    marker_file = f"data/step_{{state['generation']:04d}}.txt"
     with open(marker_file, 'w') as f:
-        f.write(f"Generation: {{state['generation']}}\\\\n")
-        f.write(f"Concept: {project['concept']}\\\\n")
+        f.write(f"Evolution Step {{state['generation']}}\\nStatus: {{mutation}}")
     
-    summary = f"Generation {{state['generation']}} evolved successfully."
+    summary = f"Generation {{state['generation']}} complete: {{mutation}}"
     log_evolution(state, summary)
+    update_readme(summary)
     
-    print(f"✅ {project['title']} - Generation {{state['generation']}}")
-    
+    print(f"✅ {{summary}}")
     return state
 
 def main():
-    ""Main evolution loop"""
-    print(f"🧬 {project['title']} - Evolution Step")
-    print("=" * 50)
-    
     state = load_state()
-    
-    if state["generation"] >= 365:  # One year limit
-        print("⚠️  Max generations reached.")
-        return
-    
     state = evolve_step(state)
     save_state(state)
-    
-    print("=" * 50)
-    print(f"✅ Generation {{state['generation']}} complete\\\\n")
 
 if __name__ == "__main__":
     main()

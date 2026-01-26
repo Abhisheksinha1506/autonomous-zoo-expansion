@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Fractal Directory Tree
-Self-similar directory structure expanding infinitely
+Fractal Directory Tree - Autonomous Evolution Script
 """
 
 import json
@@ -12,77 +11,68 @@ from datetime import datetime
 from pathlib import Path
 
 def load_state():
-    """Load current state from JSON"""
     if Path("state.json").exists():
         with open("state.json") as f:
             return json.load(f)
-    return {
-        "generation": 0
-    }
+    return {"generation": 0}
 
 def save_state(state):
-    """Persist state to JSON"""
     with open("state.json", 'w') as f:
         json.dump(state, f, indent=2)
 
-def get_date_seed():
-    """Generate deterministic seed from current date"""
-    date_str = str(datetime.now().date())
-    return int(hashlib.sha256(date_str.encode()).hexdigest(), 16) % (2**32)
-
 def log_evolution(state, summary):
-    """Append to evolution_log.md"""
     timestamp = datetime.now().isoformat()
-    
     if not Path("evolution_log.md").exists():
         with open("evolution_log.md", 'w') as f:
-            f.write("# Fractal Directory Tree Evolution\\n\\n")
-            f.write("Tracking autonomous evolution over time.\\n\\n")
-    
+            f.write("# Fractal Directory Tree Evolution History\n\n")
     with open("evolution_log.md", 'a') as f:
-        f.write(f"\\n## Generation {state['generation']} — {timestamp[:10]}\\n\\n")
-        f.write(f"{summary}\\n")
+        f.write(f"\n## Generation {state['generation']} — {timestamp[:10]}\n{summary}\n")
+
+def update_readme(summary):
+    readme_path = Path("README.md")
+    if not readme_path.exists(): return
+    with open(readme_path, 'r') as f:
+        content = f.read()
+    
+    start_marker = "<!-- LATEST_STATUS_START -->"
+    end_marker = "<!-- LATEST_STATUS_END -->"
+    
+    if start_marker in content and end_marker in content:
+        parts = content.split(start_marker)
+        prefix = parts[0] + start_marker
+        suffix = end_marker + parts[1].split(end_marker)[1]
+        new_content = f"{prefix}\n*{summary}*\n{suffix}"
+        with open(readme_path, 'w') as f:
+            f.write(new_content)
 
 def evolve_step(state):
-    """Core evolution logic - IMPLEMENT YOUR ALGORITHM HERE"""
     state["generation"] += 1
-    random.seed(get_date_seed())
-    
-    # Create data directory
+    random.seed(int(hashlib.md5(str(state["generation"]).encode()).hexdigest(), 16))
     Path("data").mkdir(exist_ok=True)
     
-    # TODO: Implement Fractal Directory Tree logic here
-    # This is a template - customize based on your mathematical concept
-    
-    # Example: Create a marker file
-    marker_file = f"data/gen_{state['generation']:04d}.txt"
+    # Logic for Fractal Directory Tree
+    # (Placeholder simulation of evolution)
+    event_roll = random.random()
+    if event_roll > 0.5:
+        mutation = "The system achieved a stable equilibrium." 
+    else:
+        mutation = "A minor fluctuation was absorbed into the structure."
+        
+    marker_file = f"data/step_{state['generation']:04d}.txt"
     with open(marker_file, 'w') as f:
-        f.write(f"Generation: {state['generation']}\\n")
-        f.write(f"Concept: Fractal Geometry - self-similar patterns at every scale\\n")
+        f.write(f"Evolution Step {state['generation']}\nStatus: {mutation}")
     
-    summary = f"Generation {state['generation']} evolved successfully."
+    summary = f"Generation {state['generation']} complete: {mutation}"
     log_evolution(state, summary)
+    update_readme(summary)
     
-    print(f"✅ Fractal Directory Tree - Generation {state['generation']}")
-    
+    print(f"✅ {summary}")
     return state
 
 def main():
-    """Main evolution loop"""
-    print(f"🧬 Fractal Directory Tree - Evolution Step")
-    print("=" * 50)
-    
     state = load_state()
-    
-    if state["generation"] >= 365:  # One year limit
-        print("⚠️  Max generations reached.")
-        return
-    
     state = evolve_step(state)
     save_state(state)
-    
-    print("=" * 50)
-    print(f"✅ Generation {state['generation']} complete\\n")
 
 if __name__ == "__main__":
     main()

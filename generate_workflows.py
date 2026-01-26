@@ -31,7 +31,7 @@ def create_workflow(project):
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Run every 6 hours
+    - cron: '0 * * * *' # Run every hour
   workflow_dispatch:
 
 jobs:
@@ -51,17 +51,24 @@ jobs:
           python-version: '3.x'
 
       - name: Run evolution script
+        id: run_evolve
         run: |
           cd projects/{project['tier']}/{project['name']}
           python3 evolve.py
+          echo "SUMMARY=$(tail -n 1 evolution_log.md)" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Evolve {project['title']} - Gen ${{ github.run_number }}"
+          commit-message: "Evolve {project['title']} - Step ${{ github.run_number }}"
           branch: "evolution/{project['name']}"
-          title: "Evolution: {project['title']} - Day ${{ github.run_number }}"
-          body: "Autonomous evolution step for {project['title']}. Generation updated based on mathematical rules."
+          title: "🧬 {project['title']}: Step ${{ github.run_number }}"
+          body: |
+            ### Autonomous Evolution
+            **Project**: {project['title']}
+            **Transition**: ${{ steps.run_evolve.outputs.SUMMARY }}
+            
+            This PR was generated automatically by the ecosystem.
           delete-branch: true
 
       - name: Report Failure
@@ -73,7 +80,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: '🚨 Incident: Evolution Halted for {project['title']}',
-              body: 'The daily evolution script for {project['title']} failed. Please check the [Actions log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ') for details.'
+              body: 'The evolution script for {project['title']} failed.\\n\\n[View Actions Log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ')',
+              labels: ['evolution-failure']
             }})
 '''
 

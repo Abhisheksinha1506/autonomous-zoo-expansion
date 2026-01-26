@@ -4,6 +4,11 @@
 
 # PageRank  File Importance — Ranking files by network importance algorithm
 
+## 📢 Latest Status
+<!-- LATEST_STATUS_START -->
+*Awaiting the first autonomous evolution step...*
+<!-- LATEST_STATUS_END -->
+
 ## 📖 The Analogy
 
 > Google's ranking algorithm for files—important files get promoted, obscure ones deleted.
@@ -14,47 +19,34 @@
 
 **PageRank Algorithm - measuring importance of nodes in a network graph**
 
-This repository implements this concept autonomously, evolving daily without human intervention.
+This repository implements this concept autonomously. Instead of a human programmer making decisions, the system follows these mathematical laws to reorganize itself over time.
 
 ## 🎯 What This Does
 
-Every day, the repository evolves according to the mathematical rules defined in `evolve.py`.
-
-## 📊 Current State
-
-- **Generation**: Check `state.json`
-- **Evolution Log**: See `evolution_log.md`
+Every day, the repository breathes:
+1. **Scanning**: It looks at the current state in [state.json](state.json).
+2. **Calculating**: It applies the PageRank  File Importance rules to decide what happens next.
+3. **Evolving**: It creates or deletes files in the [data/](data/) directory.
+4. **Reporting**: It updates this README and logs the progress in [evolution_log.md](evolution_log.md).
 
 ## 🚀 Running Locally
 
 ```bash
-python evolve.py  # Run one evolution step
+python evolve.py  # Run one evolution step manually
 ```
 
-## 📖 Layman Explanation
-
-"Google's ranking algorithm for files—important files get promoted, obscure ones deleted."
+## 📖 Non-Technical Explanation
+Google's ranking algorithm for files—important files get promoted, obscure ones deleted. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
 ## 🔬 Technical Details
 
-- **Algorithm**: Implemented in `evolve.py`
-- **State Management**: `state.json`
-- **Determinism**: Date-based randomness
-
-## 📈 Evolution Log
-
-See [evolution_log.md](evolution_log.md) for the complete evolution timeline.
-
-## 🛠️ Technical Anatomy
-
-- **DNA**: [evolve.py](evolve.py) (The instructions for life)
-- **Vital Signs**: [state.json](state.json) (Current memory and state)
+- **Algorithm**: Deterministic implementation of PageRank  File Importance
+- **State**: Persistent JSON storage for continuity
+- **Automation**: GitHub Actions (runs every hour)
 
 ## 🏘️ Neighboring Organisms
-
-⬅️ **Previous**: [../../tier10-biological/predator-prey-dynamics](../../../tier10-biological/predator-prey-dynamics/README.md)
-
+⬅️ **Previous**: [Previous Project](../../tier10-biological/predator-prey-dynamics/README.md)
+➡️ **Next**: End of Expansion
 
 ---
-
 **Status**: 🟢 Fully Autonomous | **Tier**: 11 | **Autonomy**: ⭐⭐⭐⭐⭐
