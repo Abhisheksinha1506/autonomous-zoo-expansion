@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Wolves and rabbits—predator files hunt prey files, populations oscillate in endless cycles. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Oscillating graphs of file counts in the data/ directory.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Population Dynamics. It explains why animal populations (and market trends) go up and down in cycles.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Predator-Prey Dynamics

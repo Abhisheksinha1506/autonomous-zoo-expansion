@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Like coloring a map so no two touching countries have the same color—except with code files. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+A network of files and imports that are automatically tagged or 'colored' to avoid rule conflicts.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Constraint Satisfaction. It's the logic used to schedule airline flights or cellular network frequencies.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Graph Coloring Repo

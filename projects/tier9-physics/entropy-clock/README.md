@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 The universe winding down—each day the repo gets messier, approaching maximum disorder. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Increasing file clutter and random renames that only stop when everything is perfectly random.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates The Second Law of Thermodynamics. It visualizes the inevitable 'Heat Death' of systems.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Entropy Clock

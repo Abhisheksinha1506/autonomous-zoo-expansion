@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 A clock that resets mutations—every 12th hour, everything changes in a predictable cycle. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Predictable re-organization of files that resets every 12 or 24 steps.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Periodic Cycles. It shows how code can have 'rhythm' and reset itself to a base state automatically.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Modulo Mutation Engine

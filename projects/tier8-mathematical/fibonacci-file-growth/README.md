@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Files multiply like rabbits—each generation equals the sum of the previous two. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+A directory tree that grows at an accelerating, organic pace (1, 1, 2, 3, 5 files...).
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Recursive Growth. It visualizes the 'Golden Ratio' patterns found in shells and galaxies.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Fibonacci File Growth

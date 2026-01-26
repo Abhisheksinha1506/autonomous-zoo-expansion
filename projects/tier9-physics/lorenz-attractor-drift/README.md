@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Files drift through directories like weather systems—chaotic yet beautifully patterned. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Files jumping between directories in a chaotic 'butterfly' pattern.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Chaos Theory. It shows how tiny changes can lead to big, unpredictable (but organized) outcomes.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Lorenz Attractor File Drift

@@ -17,6 +17,8 @@ PROJECTS = [
         "tagline": "The Selective Bouncer",
         "analogy": "Think of this repo as a VIP club that only admits prime-numbered guests. Every commit's hash gets converted to a number—if it's prime, the commit stays.",
         "concept": "Prime Numbers - integers greater than 1 that have no divisors other than 1 and themselves.",
+        "output": "A commit history where every single change is mathematically 'lucky'.",
+        "usefulness": "Demonstrates Filter-based Selection. It shows how strict rules can create a 'pure' environment.",
         "prev": None,
         "next": "fibonacci-file-growth"
     },
@@ -27,6 +29,8 @@ PROJECTS = [
         "tagline": "Growing files according to the Fibonacci sequence",
         "analogy": "Files multiply like rabbits—each generation equals the sum of the previous two.",
         "concept": "Fibonacci Sequence - each number is the sum of the two preceding ones (1, 1, 2, 3, 5, 8, 13...)",
+        "output": "A directory tree that grows at an accelerating, organic pace (1, 1, 2, 3, 5 files...).",
+        "usefulness": "Demonstrates Recursive Growth. It visualizes the 'Golden Ratio' patterns found in shells and galaxies.",
         "prev": "prime-commit-filter",
         "next": "modulo-mutation-engine"
     },
@@ -37,6 +41,8 @@ PROJECTS = [
         "tagline": "Cyclic mutations based on modular arithmetic",
         "analogy": "A clock that resets mutations—every 12th hour, everything changes in a predictable cycle.",
         "concept": "Modular Arithmetic - numbers wrap around like a clock (23 mod 12 = 11)",
+        "output": "Predictable re-organization of files that resets every 12 or 24 steps.",
+        "usefulness": "Demonstrates Periodic Cycles. It shows how code can have 'rhythm' and reset itself to a base state automatically.",
         "prev": "fibonacci-file-growth",
         "next": "graph-coloring-repo"
     },
@@ -47,6 +53,8 @@ PROJECTS = [
         "tagline": "Ensuring proper graph coloring of file dependencies",
         "analogy": "Like coloring a map so no two touching countries have the same color—except with code files.",
         "concept": "Graph Coloring - assigning colors to vertices so no adjacent vertices share the same color",
+        "output": "A network of files and imports that are automatically tagged or 'colored' to avoid rule conflicts.",
+        "usefulness": "Demonstrates Constraint Satisfaction. It's the logic used to schedule airline flights or cellular network frequencies.",
         "prev": "modulo-mutation-engine",
         "next": "palindrome-commit-detector"
     },
@@ -57,6 +65,8 @@ PROJECTS = [
         "tagline": "Celebrating palindromic commit hashes",
         "analogy": "A repo that celebrates when commit hashes read the same forwards and backwards, like 'racecar'.",
         "concept": "Palindromes - sequences that read the same forwards and backwards",
+        "output": "Highlighting and preserving changes that have perfectly symmetric digital fingerprints.",
+        "usefulness": "Demonstrates Pattern Recognition. It shows how a system can find meaning and order within random data.",
         "prev": "graph-coloring-repo",
         "next": "../../tier9-physics/lorenz-attractor-drift"
     },
@@ -68,6 +78,8 @@ PROJECTS = [
         "tagline": "Files drift through chaotic but bounded trajectories",
         "analogy": "Files drift through directories like weather systems—chaotic yet beautifully patterned.",
         "concept": "Lorenz Attractor - chaotic system with butterfly-wing shaped strange attractor",
+        "output": "Files jumping between directories in a chaotic 'butterfly' pattern.",
+        "usefulness": "Demonstrates Chaos Theory. It shows how tiny changes can lead to big, unpredictable (but organized) outcomes.",
         "prev": "../../tier8-mathematical/palindrome-commit-detector",
         "next": "pendulum-oscillator"
     },
@@ -78,6 +90,8 @@ PROJECTS = [
         "tagline": "Files oscillate between directories harmonically",
         "analogy": "Files swing back and forth between folders like a grandfather clock, forever.",
         "concept": "Simple Harmonic Motion - periodic oscillation like a pendulum",
+        "output": "Rhythmic movement of files between 'Left' and 'Right' directories.",
+        "usefulness": "Demonstrates Harmonic Motion. It shows how code can simulate gravity and momentum.",
         "prev": "lorenz-attractor-drift",
         "next": "entropy-clock"
     },
@@ -88,6 +102,8 @@ PROJECTS = [
         "tagline": "Repository entropy increases toward maximum disorder",
         "analogy": "The universe winding down—each day the repo gets messier, approaching maximum disorder.",
         "concept": "Second Law of Thermodynamics - entropy always increases in isolated systems",
+        "output": "Increasing file clutter and random renames that only stop when everything is perfectly random.",
+        "usefulness": "Demonstrates The Second Law of Thermodynamics. It visualizes the inevitable 'Heat Death' of systems.",
         "prev": "pendulum-oscillator",
         "next": "ising-model"
     },
@@ -98,6 +114,8 @@ PROJECTS = [
         "tagline": "Files align or flip like magnetic spins",
         "analogy": "Files like magnets—they align with neighbors or flip opposite, creating magnetic domains.",
         "concept": "Ising Model - statistical model of ferromagnetism in statistical mechanics",
+        "output": "Clusters of 'Up' files and 'Down' files forming 'islands' of similarity.",
+        "usefulness": "Demonstrates Emergent Cooperation. It explains how simple local interactions create large-scale patterns (like brain cells or social trends).",
         "prev": "entropy-clock",
         "next": "fractal-directory-tree"
     },
@@ -108,6 +126,8 @@ PROJECTS = [
         "tagline": "Self-similar directory structure expanding infinitely",
         "analogy": "A tree that grows smaller copies of itself infinitely, like looking into infinite mirrors.",
         "concept": "Fractal Geometry - self-similar patterns at every scale",
+        "output": "A self-similar hierarchy of directories that looks the same no matter how deep you zoom.",
+        "usefulness": "Demonstrates Recursion & Self-Similarity. It's the math behind coastlines, mountaintops, and broccoli.",
         "prev": "ising-model",
         "next": "../../tier10-biological/dna-encoded-repo"
     },
@@ -119,6 +139,8 @@ PROJECTS = [
         "tagline": "Files encoded as DNA sequences with genetic mutations",
         "analogy": "Files are DNA strands—mutations happen, genes duplicate, evolution occurs over generations.",
         "concept": "Genetic Code - DNA bases (A, T, G, C) encoding information with mutations and replication",
+        "output": "Generations of files with inherited traits and occasional random changes.",
+        "usefulness": "Demonstrates Information Encoding. It shows how digital data can behave like biological life.",
         "prev": "../../tier9-physics/fractal-directory-tree",
         "next": "darwinian-file-selection"
     },
@@ -129,6 +151,8 @@ PROJECTS = [
         "tagline": "Natural selection among files based on fitness",
         "analogy": "Survival of the fittest—only the strongest, most 'fit' files survive each generation.",
         "concept": "Natural Selection - differential survival and reproduction based on fitness",
+        "output": "A lean repository where only high-value content remains.",
+        "usefulness": "Demonstrates Optimization by Natural Selection. It shows how systems get better by removing failures.",
         "prev": "dna-encoded-repo",
         "next": "symbiosis-repo"
     },
@@ -139,6 +163,8 @@ PROJECTS = [
         "tagline": "Files with interdependent survival relationships",
         "analogy": "Files that need each other to survive—kill one, and its partner dies too, like bees and flowers.",
         "concept": "Symbiosis - close ecological relationships between different species",
+        "output": "A tightly-coupled network where files are interdependent.",
+        "usefulness": "Demonstrates Interdependency. It highlights how ecosystems (and software modules) rely on each other.",
         "prev": "darwinian-file-selection",
         "next": "predator-prey-dynamics"
     },
@@ -149,6 +175,8 @@ PROJECTS = [
         "tagline": "Population oscillations following Lotka-Volterra equations",
         "analogy": "Wolves and rabbits—predator files hunt prey files, populations oscillate in endless cycles.",
         "concept": "Lotka-Volterra Equations - mathematical model of predator-prey interactions",
+        "output": "Oscillating graphs of file counts in the data/ directory.",
+        "usefulness": "Demonstrates Population Dynamics. It explains why animal populations (and market trends) go up and down in cycles.",
         "prev": "symbiosis-repo",
         "next": "../../tier11-graph/pagerank-file-importance"
     },
@@ -160,6 +188,8 @@ PROJECTS = [
         "tagline": "Ranking files by network importance algorithm",
         "analogy": "Google's ranking algorithm for files—important files get promoted, obscure ones deleted.",
         "concept": "PageRank Algorithm - measuring importance of nodes in a network graph",
+        "output": "A hierarchy of files sorted by their connectivity and influence.",
+        "usefulness": "Demonstrates Network Importance. This is the exact math Google used to find the best websites on the internet.",
         "prev": "../../tier10-biological/predator-prey-dynamics",
         "next": None
     }
@@ -209,6 +239,12 @@ python evolve.py  # Run one evolution step manually
 
 ## 📖 Non-Technical Explanation
 {project['analogy']} This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
+
+## ✨ Expected Output
+{project['output']}
+
+## 💎 Why it matters (Usefulness)
+{project['usefulness']}
 
 ## 🔬 Technical Details
 

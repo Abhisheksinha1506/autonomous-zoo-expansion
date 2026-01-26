@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Files like magnets—they align with neighbors or flip opposite, creating magnetic domains. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Clusters of 'Up' files and 'Down' files forming 'islands' of similarity.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Emergent Cooperation. It explains how simple local interactions create large-scale patterns (like brain cells or social trends).
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Ising Model Repo

@@ -6,7 +6,7 @@
 
 ## 📢 Latest Status
 <!-- LATEST_STATUS_START -->
-*Generation 1 complete: A minor fluctuation was absorbed into the structure.*
+*Awaiting the first autonomous evolution step...*
 <!-- LATEST_STATUS_END -->
 
 ## 📖 The Analogy
@@ -37,6 +37,12 @@ python evolve.py  # Run one evolution step manually
 
 ## 📖 Non-Technical Explanation
 Think of this repo as a VIP club that only admits prime-numbered guests. Every commit's hash gets converted to a number—if it's prime, the commit stays. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
+
+## ✨ Expected Output
+A commit history where every single change is mathematically 'lucky'.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Filter-based Selection. It shows how strict rules can create a 'pure' environment.
 
 ## 🔬 Technical Details
 

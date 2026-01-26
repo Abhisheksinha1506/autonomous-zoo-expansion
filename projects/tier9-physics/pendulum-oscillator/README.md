@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Files swing back and forth between folders like a grandfather clock, forever. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Rhythmic movement of files between 'Left' and 'Right' directories.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Harmonic Motion. It shows how code can simulate gravity and momentum.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Pendulum Repo Oscillator

@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Google's ranking algorithm for files—important files get promoted, obscure ones deleted. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+A hierarchy of files sorted by their connectivity and influence.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Network Importance. This is the exact math Google used to find the best websites on the internet.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of PageRank  File Importance

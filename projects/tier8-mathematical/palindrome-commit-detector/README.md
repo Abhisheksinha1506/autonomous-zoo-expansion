@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 A repo that celebrates when commit hashes read the same forwards and backwards, like 'racecar'. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+Highlighting and preserving changes that have perfectly symmetric digital fingerprints.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Pattern Recognition. It shows how a system can find meaning and order within random data.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Palindrome Commit Detector

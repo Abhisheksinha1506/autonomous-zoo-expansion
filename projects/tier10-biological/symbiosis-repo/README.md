@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Files that need each other to survive—kill one, and its partner dies too, like bees and flowers. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+A tightly-coupled network where files are interdependent.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Interdependency. It highlights how ecosystems (and software modules) rely on each other.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Symbiosis Repo

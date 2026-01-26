@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 A tree that grows smaller copies of itself infinitely, like looking into infinite mirrors. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+A self-similar hierarchy of directories that looks the same no matter how deep you zoom.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Recursion & Self-Similarity. It's the math behind coastlines, mountaintops, and broccoli.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Fractal Directory Tree

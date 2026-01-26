@@ -38,6 +38,12 @@ python evolve.py  # Run one evolution step manually
 ## 📖 Non-Technical Explanation
 Survival of the fittest—only the strongest, most 'fit' files survive each generation. This means the repository isn't just static code—it's a living system where files interact, compete, or grow according to rules, just like plants in a garden or planets in orbit.
 
+## ✨ Expected Output
+A lean repository where only high-value content remains.
+
+## 💎 Why it matters (Usefulness)
+Demonstrates Optimization by Natural Selection. It shows how systems get better by removing failures.
+
 ## 🔬 Technical Details
 
 - **Algorithm**: Deterministic implementation of Darwinian File Selection
