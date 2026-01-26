@@ -1,0 +1,51 @@
+name: Expansion Pack Evolution
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 02:00 UTC
+  workflow_dispatch:
+
+concurrency: expansion-pack-evolution
+
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Dependencies
+        run: |
+          pip install requests numpy
+
+      - name: Evolve Projects
+        run: |
+          # Find all directories in projects containing evolve.py
+          find "projects" -name "evolve.py" | while read script; do
+            dir=$(dirname "$script")
+            echo "🧬 Evolving Organism: $dir"
+            
+            # Execute in subshell to isolate directory context
+            (
+              cd "$dir"
+              if [ -f "requirements.txt" ]; then
+                pip install -r requirements.txt
+              fi
+              python3 evolve.py
+            )
+          done
+          
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Expansion Evolution: Daily growth cycle [skip ci]"
+          branch: main
