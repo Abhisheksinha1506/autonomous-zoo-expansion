@@ -1,41 +1,37 @@
 #!/usr/bin/env python3
 """
-Script to generate GitHub Actions workflows for all projects
+Script to generate GitHub Actions workflow files for each project in autonomous-zoo-expansion
 """
 
 import os
 from pathlib import Path
 
-# Project definitions
+# Project definitions (same as before)
 PROJECTS = [
-    # Tier 8
-    ("tier8-mathematical", "prime-commit-filter", "Prime Commit Filter"),
-    ("tier8-mathematical", "fibonacci-file-growth", "Fibonacci File Growth"),
-    ("tier8-mathematical", "modulo-mutation-engine", "Modulo Mutation Engine"),
-    ("tier8-mathematical", "graph-coloring-repo", "Graph Coloring Repo"),
-    ("tier8-mathematical", "palindrome-commit-detector", "Palindrome Commit Detector"),
-    # Tier 9
-    ("tier9-physics", "lorenz-attractor-drift", "Lorenz Attractor Drift"),
-    ("tier9-physics", "pendulum-oscillator", "Pendulum Oscillator"),
-    ("tier9-physics", "entropy-clock", "Entropy Clock"),
-    ("tier9-physics", "ising-model", "Ising Model"),
-    ("tier9-physics", "fractal-directory-tree", "Fractal Directory Tree"),
-    # Tier 10
-    ("tier10-biological", "dna-encoded-repo", "DNA Encoded Repo"),
-    ("tier10-biological", "darwinian-file-selection", "Darwinian File Selection"),
-    ("tier10-biological", "symbiosis-repo", "Symbiosis Repo"),
-    ("tier10-biological", "predator-prey-dynamics", "Predator-Prey Dynamics"),
-    # Tier 11
-    ("tier11-graph", "pagerank-file-importance", "PageRank File Importance"),
+    {"tier": "tier8-mathematical", "name": "prime-commit-filter", "title": "Prime Commit Filter"},
+    {"tier": "tier8-mathematical", "name": "fibonacci-file-growth", "title": "Fibonacci File Growth"},
+    {"tier": "tier8-mathematical", "name": "modulo-mutation-engine", "title": "Modulo Mutation Engine"},
+    {"tier": "tier8-mathematical", "name": "graph-coloring-repo", "title": "Graph Coloring Repo"},
+    {"tier": "tier8-mathematical", "name": "palindrome-commit-detector", "title": "Palindrome Commit Detector"},
+    {"tier": "tier9-physics", "name": "lorenz-attractor-drift", "title": "Lorenz Attractor File Drift"},
+    {"tier": "tier9-physics", "name": "pendulum-oscillator", "title": "Pendulum Repo Oscillator"},
+    {"tier": "tier9-physics", "name": "entropy-clock", "title": "Entropy Clock"},
+    {"tier": "tier9-physics", "name": "ising-model", "title": "Ising Model"},
+    {"tier": "tier9-physics", "name": "fractal-directory-tree", "title": "Fractal Directory Tree"},
+    {"tier": "tier10-biological", "name": "dna-encoded-repo", "title": "DNA-Encoded Repo"},
+    {"tier": "tier10-biological", "name": "darwinian-file-selection", "title": "Darwinian File Selection"},
+    {"tier": "tier10-biological", "name": "symbiosis-repo", "title": "Symbiosis Repo"},
+    {"tier": "tier10-biological", "name": "predator-prey-dynamics", "title": "Predator-Prey Dynamics"},
+    {"tier": "tier11-graph", "name": "pagerank-file-importance", "title": "PageRank File Importance"}
 ]
 
-def create_workflow(tier, project_name, display_name):
-    """Generate GitHub Actions workflow content"""
-    return f"""name: Evolve {display_name}
+def create_workflow(project):
+    """Generate YAML content for the project's workflow"""
+    return f'''name: Evolve {project['title']}
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Run every 6 hours
+    - cron: '0 */6 * * *' # Run every 6 hours
   workflow_dispatch:
 
 jobs:
@@ -55,23 +51,17 @@ jobs:
           python-version: '3.x'
 
       - name: Run evolution script
-        working-directory: ./projects/{tier}/{project_name}
-        run: python3 evolve.py
+        run: |
+          cd projects/{project['tier']}/{project['name']}
+          python3 evolve.py
 
       - name: Create Pull Request
-        if: success()
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Evolve {display_name} - Gen ${{{{ github.run_number }}}}"
-          branch: "evolution/{project_name}"
-          title: "{display_name} Evolution: Gen ${{{{ github.run_number }}}}"
-          body: |
-            🧬 **Autonomous Evolution Update**
-            
-            Project: {display_name}
-            Generation: ${{{{ github.run_number }}}}
-            
-            This PR contains the latest evolution step generated automatically by GitHub Actions.
+          commit-message: "Evolve {project['title']} - Gen ${{ github.run_number }}"
+          branch: "evolution/{project['name']}"
+          title: "Evolution: {project['title']} - Day ${{ github.run_number }}"
+          body: "Autonomous evolution step for {project['title']}. Generation updated based on mathematical rules."
           delete-branch: true
 
       - name: Report Failure
@@ -82,28 +72,23 @@ jobs:
             github.rest.issues.create({{
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '🚨 Evolution Failed: {display_name}',
-              body: 'The evolution script for {display_name} failed. Check the [Actions log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ') for details.',
-              labels: ['evolution-failure', '{tier}']
+              title: '🚨 Incident: Evolution Halted for {project['title']}',
+              body: 'The daily evolution script for {project['title']} failed. Please check the [Actions log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ') for details.'
             }})
-"""
+'''
 
 def main():
-    base_path = Path("/Users/abhisheksinha/Desktop/Autogit/autonomous-zoo-expansion")
-    workflows_dir = base_path / ".github" / "workflows"
-    workflows_dir.mkdir(parents=True, exist_ok=True)
+    repo_path = Path("/Users/abhisheksinha/Desktop/Autogit/autonomous-zoo-expansion")
+    workflow_dir = repo_path / ".github" / "workflows"
+    workflow_dir.mkdir(parents=True, exist_ok=True)
     
-    print(f"Creating workflows in {workflows_dir}")
+    for project in PROJECTS:
+        filename = f"evolve_{project['name']}.yml"
+        with open(workflow_dir / filename, 'w') as f:
+            f.write(create_workflow(project))
+        print(f"✅ Created workflow: {filename}")
     
-    for tier, project_name, display_name in PROJECTS:
-        workflow_file = workflows_dir / f"evolve-{project_name}.yml"
-        
-        with open(workflow_file, 'w') as f:
-            f.write(create_workflow(tier, project_name, display_name))
-        
-        print(f"✅ Created workflow for {display_name}")
-    
-    print(f"\n🎉 All {len(PROJECTS)} workflows created in .github/workflows/")
+    print(f"\\n🎉 All {len(PROJECTS)} workflow files generated!")
 
 if __name__ == "__main__":
     main()
