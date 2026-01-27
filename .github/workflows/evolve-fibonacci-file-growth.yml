@@ -1,3 +1,5 @@
+concurrency: expansion-evolution
+
 name: Evolve Fibonacci File Growth
 
 on:
@@ -27,6 +29,14 @@ jobs:
       - name: Run evolution script
         working-directory: ./projects/tier8-mathematical/fibonacci-file-growth
         run: python3 evolve.py
+
+      
+      - name: Fetch and Rebase
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git pull --rebase origin main
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -44,6 +44,14 @@ jobs:
             )
           done
           
+      
+      - name: Fetch and Rebase
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git pull --rebase origin main
+
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
