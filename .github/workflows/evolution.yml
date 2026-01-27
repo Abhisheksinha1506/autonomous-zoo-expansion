@@ -1,11 +1,11 @@
+concurrency: autonomous-zoo-expansion-evolution
+
 name: Expansion Pack Evolution
 
 on:
   schedule:
     - cron: '30 20 * * *'  # Daily at 20:30 UTC (02:00 IST)
   workflow_dispatch:
-
-concurrency: expansion-pack-evolution
 
 jobs:
   evolve:
