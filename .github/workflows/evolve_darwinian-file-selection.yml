@@ -2,7 +2,7 @@ name: Evolve Darwinian File Selection
 
 on:
   schedule:
-    - cron: '0 * * * *' # Run every hour
+    - cron: '30 * * * *' # Run every hour
   workflow_dispatch:
 
 jobs:

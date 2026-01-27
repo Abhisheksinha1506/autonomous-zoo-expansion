@@ -2,7 +2,7 @@ name: Evolve Graph Coloring Repo
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Run every 6 hours
+    - cron: '30 */6 * * *'  # Run every 6 hours
   workflow_dispatch:
 
 jobs:

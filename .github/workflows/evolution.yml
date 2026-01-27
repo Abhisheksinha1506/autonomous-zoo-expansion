@@ -2,7 +2,7 @@ name: Expansion Pack Evolution
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Daily at 02:00 UTC
+    - cron: '30 20 * * *'  # Daily at 20:30 UTC (02:00 IST)
   workflow_dispatch:
 
 concurrency: expansion-pack-evolution
