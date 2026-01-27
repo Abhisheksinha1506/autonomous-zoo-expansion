@@ -39,7 +39,8 @@ jobs:
           git pull --rebase origin main
 
       - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Evolve Darwinian File Selection - Step ${ github.run_number } [skip ci]"
           branch: main
