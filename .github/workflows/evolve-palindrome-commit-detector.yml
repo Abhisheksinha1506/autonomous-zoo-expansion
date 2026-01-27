@@ -25,31 +25,8 @@ jobs:
         working-directory: ./projects/tier8-mathematical/palindrome-commit-detector
         run: python3 evolve.py
 
-      - name: Create Pull Request
-        if: success()
-        uses: peter-evans/create-pull-request@v6
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit-message: "Evolve Palindrome Commit Detector - Gen ${{ github.run_number }}"
-          branch: "evolution/palindrome-commit-detector"
-          title: "Palindrome Commit Detector Evolution: Gen ${{ github.run_number }}"
-          body: |
-            🧬 **Autonomous Evolution Update**
-            
-            Project: Palindrome Commit Detector
-            Generation: ${{ github.run_number }}
-            
-            This PR contains the latest evolution step generated automatically by GitHub Actions.
-          delete-branch: true
-
-      - name: Report Failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨 Evolution Failed: Palindrome Commit Detector',
-              body: 'The evolution script for Palindrome Commit Detector failed. Check the [Actions log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ') for details.',
-              labels: ['evolution-failure', 'tier8-mathematical']
-            })
+          commit_message: "Evolve Palindrome Commit Detector - Gen ${{ github.run_number }} [skip ci]"
+          branch: main

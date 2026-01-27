@@ -28,29 +28,8 @@ jobs:
           python3 evolve.py
           echo "SUMMARY=$(tail -n 1 evolution_log.md)" >> $GITHUB_OUTPUT
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit-message: "Evolve Predator-Prey Dynamics - Step ${ github.run_number }"
-          branch: "evolution/predator-prey-dynamics"
-          title: "🧬 Predator-Prey Dynamics: Step ${ github.run_number }"
-          body: |
-            ### Autonomous Evolution
-            **Project**: Predator-Prey Dynamics
-            **Transition**: ${ steps.run_evolve.outputs.SUMMARY }
-            
-            This PR was generated automatically by the ecosystem.
-          delete-branch: true
-
-      - name: Report Failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨 Incident: Evolution Halted for Predator-Prey Dynamics',
-              body: 'The evolution script for Predator-Prey Dynamics failed.\n\n[View Actions Log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ')',
-              labels: ['evolution-failure']
-            })
+          commit_message: "Evolve Predator-Prey Dynamics - Step ${ github.run_number } [skip ci]"
+          branch: main

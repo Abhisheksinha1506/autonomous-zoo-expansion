@@ -25,31 +25,8 @@ jobs:
         working-directory: ./projects/tier9-physics/ising-model
         run: python3 evolve.py
 
-      - name: Create Pull Request
-        if: success()
-        uses: peter-evans/create-pull-request@v6
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit-message: "Evolve Ising Model - Gen ${{ github.run_number }}"
-          branch: "evolution/ising-model"
-          title: "Ising Model Evolution: Gen ${{ github.run_number }}"
-          body: |
-            🧬 **Autonomous Evolution Update**
-            
-            Project: Ising Model
-            Generation: ${{ github.run_number }}
-            
-            This PR contains the latest evolution step generated automatically by GitHub Actions.
-          delete-branch: true
-
-      - name: Report Failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨 Evolution Failed: Ising Model',
-              body: 'The evolution script for Ising Model failed. Check the [Actions log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ') for details.',
-              labels: ['evolution-failure', 'tier9-physics']
-            })
+          commit_message: "Evolve Ising Model - Gen ${{ github.run_number }} [skip ci]"
+          branch: main

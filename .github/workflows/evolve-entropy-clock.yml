@@ -25,31 +25,8 @@ jobs:
         working-directory: ./projects/tier9-physics/entropy-clock
         run: python3 evolve.py
 
-      - name: Create Pull Request
-        if: success()
-        uses: peter-evans/create-pull-request@v6
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit-message: "Evolve Entropy Clock - Gen ${{ github.run_number }}"
-          branch: "evolution/entropy-clock"
-          title: "Entropy Clock Evolution: Gen ${{ github.run_number }}"
-          body: |
-            🧬 **Autonomous Evolution Update**
-            
-            Project: Entropy Clock
-            Generation: ${{ github.run_number }}
-            
-            This PR contains the latest evolution step generated automatically by GitHub Actions.
-          delete-branch: true
-
-      - name: Report Failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨 Evolution Failed: Entropy Clock',
-              body: 'The evolution script for Entropy Clock failed. Check the [Actions log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ') for details.',
-              labels: ['evolution-failure', 'tier9-physics']
-            })
+          commit_message: "Evolve Entropy Clock - Gen ${{ github.run_number }} [skip ci]"
+          branch: main
