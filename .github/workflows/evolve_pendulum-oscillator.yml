@@ -39,8 +39,6 @@ jobs:
           git fetch origin main
           git pull --rebase origin main
 
-      - name: Commit Changes
-
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Evolve Pendulum Repo Oscillator - Step ${ github.run_number } [skip ci]"
