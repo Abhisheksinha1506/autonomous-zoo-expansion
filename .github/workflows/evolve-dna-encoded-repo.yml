@@ -1,5 +1,5 @@
 
-concurrency: autonomous-zoo-expansion-evolution
+concurrency: evolution-${{ github.workflow }}
 
 name: Evolve DNA-Encoded Repo
 

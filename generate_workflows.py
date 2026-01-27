@@ -28,7 +28,7 @@ PROJECTS = [
 def create_workflow(project):
     """Generate YAML content for the project's workflow"""
     return f'''
-concurrency: autonomous-zoo-expansion-evolution
+concurrency: evolution-${{{{ github.workflow }}}}
 
 name: Evolve {project['title']}
 
