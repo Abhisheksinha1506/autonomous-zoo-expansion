@@ -1,7 +1,7 @@
 
 concurrency: autonomous-zoo-expansion-evolution
 
-name: Evolve DNA Encoded Repo
+name: Evolve DNA-Encoded Repo
 
 on:
   schedule:
@@ -18,28 +18,42 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install Dependencies
-        run: pip install numpy networkx matplotlib
-
       - name: Run evolution script
-        working-directory: ./projects/tier10-biological/dna-encoded-repo
-        run: python3 evolve.py
+        id: run_evolve
+        run: |
+          cd projects/tier10-biological/dna-encoded-repo
+          python3 evolve.py
+          echo "SUMMARY=$(tail -n 1 evolution_log.md)" >> $GITHUB_OUTPUT
 
-      
       - name: Fetch and Rebase
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git fetch origin main
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Evolve DNA Encoded Repo - Gen ${{ github.run_number }} [skip ci]"
+          commit_message: "Evolve DNA-Encoded Repo - Gen ${ github.run_number } [skip ci]"
           branch: main
+
+      - name: Report Failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 Incident: Evolution Halted for DNA-Encoded Repo',
+              body: 'The evolution script for DNA-Encoded Repo failed.\n\n[View Actions Log](' + context.payload.repository.html_url + '/actions/runs/' + context.runId + ')',
+              labels: ['evolution-failure']
+            })

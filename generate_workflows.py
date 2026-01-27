@@ -27,11 +27,14 @@ PROJECTS = [
 
 def create_workflow(project):
     """Generate YAML content for the project's workflow"""
-    return f'''name: Evolve {project['title']}
+    return f'''
+concurrency: autonomous-zoo-expansion-evolution
+
+name: Evolve {project['title']}
 
 on:
   schedule:
-    - cron: '0 * * * *' # Run every hour
+    - cron: '30 */6 * * *'  # Run every 6 hours
   workflow_dispatch:
 
 jobs:
@@ -44,6 +47,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -57,19 +62,17 @@ jobs:
           python3 evolve.py
           echo "SUMMARY=$(tail -n 1 evolution_log.md)" >> $GITHUB_OUTPUT
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+      - name: Fetch and Rebase
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git pull --rebase --autostash origin main
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit-message: "Evolve {project['title']} - Step ${{ github.run_number }}"
-          branch: "evolution/{project['name']}"
-          title: "🧬 {project['title']}: Step ${{ github.run_number }}"
-          body: |
-            ### Autonomous Evolution
-            **Project**: {project['title']}
-            **Transition**: ${{ steps.run_evolve.outputs.SUMMARY }}
-            
-            This PR was generated automatically by the ecosystem.
-          delete-branch: true
+          commit_message: "Evolve {project['title']} - Gen ${{ github.run_number }} [skip ci]"
+          branch: main
 
       - name: Report Failure
         if: failure()
@@ -90,13 +93,19 @@ def main():
     workflow_dir = repo_path / ".github" / "workflows"
     workflow_dir.mkdir(parents=True, exist_ok=True)
     
+    # Cleanup old project workflows
+    for wf in workflow_dir.glob("evolve*.yml"):
+        if wf.name != "evolution.yml":
+            wf.unlink()
+            print(f"🗑️ Deleted old workflow: {wf.name}")
+
     for project in PROJECTS:
-        filename = f"evolve_{project['name']}.yml"
+        filename = f"evolve-{project['name']}.yml"
         with open(workflow_dir / filename, 'w') as f:
             f.write(create_workflow(project))
         print(f"✅ Created workflow: {filename}")
     
-    print(f"\\n🎉 All {len(PROJECTS)} workflow files generated!")
+    print(f"\n🎉 All {len(PROJECTS)} workflow files generated!")
 
 if __name__ == "__main__":
     main()
