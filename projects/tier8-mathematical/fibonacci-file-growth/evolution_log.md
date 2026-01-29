@@ -57,3 +57,6 @@ Generation 18 complete: The system achieved a stable equilibrium.
 
 ## Generation 19 — 2026-01-28
 Generation 19 complete: A minor fluctuation was absorbed into the structure.
+
+## Generation 20 — 2026-01-29
+Generation 20 complete: A minor fluctuation was absorbed into the structure.
