@@ -70,3 +70,6 @@ Generation 23 complete: The system achieved a stable equilibrium.
 
 ## Generation 24 — 2026-01-29
 Generation 24 complete: A minor fluctuation was absorbed into the structure.
+
+## Generation 25 — 2026-01-29
+Generation 25 complete: The system achieved a stable equilibrium.
