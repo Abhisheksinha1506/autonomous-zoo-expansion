@@ -360,3 +360,6 @@ Generation 119 complete: The system achieved a stable equilibrium.
 
 ## Generation 120 — 2026-02-20
 Generation 120 complete: A minor fluctuation was absorbed into the structure.
+
+## Generation 121 — 2026-02-21
+Generation 121 complete: The system achieved a stable equilibrium.
